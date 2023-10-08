@@ -95,6 +95,7 @@ const server = net.createServer((socket) => {
       // write the request body to the file
       fs.writeFile(`${directory}/${filename}`, requestBody, (err) => {
         if (err) {
+          console.log("something went wrong", err);
         }
         response += "HTTP/1.1 201 Created\r\n";
         response += "\r\n";
