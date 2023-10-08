@@ -7,10 +7,10 @@ console.log("Logs from your program will appear here!");
 const server = net.createServer((socket) => {
   // accept tcp connection
   socket.on("data", (data) => {
+    console.log(data);
     // respond with a HTTP 200 OK
     socket.write("HTTP/1.1 200 OK\r\n\r\n");
     socket.end();
-    server.close();
   });
   socket.on("close", () => {
     socket.end();
