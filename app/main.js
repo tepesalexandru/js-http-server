@@ -61,7 +61,6 @@ const server = net.createServer((socket) => {
       if (fs.existsSync(`${directory}/${filename}`)) {
         response += "HTTP/1.1 200 OK\r\n";
         response += "Content-Type: application/octet-stream\r\n";
-        response += "\r\n";
 
         // read the file contents
         const fileContent = fs.readFileSync(`${directory}/${filename}`, {
@@ -70,6 +69,7 @@ const server = net.createServer((socket) => {
         });
         // compute content length
         response += `Content-Length: ${fileContent.length}\r\n`;
+        response += "\r\n";
         // send the file contents back to the client
         response += fileContent;
       } else {
