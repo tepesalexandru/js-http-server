@@ -31,7 +31,7 @@ const server = net.createServer((socket) => {
 
       // send the message back to the client
       socket.write(
-        `HTTP/1.1 200 OK\r\n\r\nContent-Length: ${message.length}\r\n\r\n${message}\r\n\r\n`
+        `HTTP/1.1 200 OK\r\n\r\nContent-Type: text/plain\r\n\r\nContent-Length: ${message.length}\r\n\r\n${message}\r\n\r\n`
       );
     }
     // else return 404 Not Found
