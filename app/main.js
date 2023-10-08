@@ -51,12 +51,14 @@ const server = net.createServer((socket) => {
     }
     // if the path starts with /files
     else if (path.startsWith("/files")) {
+      // extract directory from shell paramters
+      const directory = process.argv[2];
       // extract the filename
       const filename = path.split("/files/")[1];
       let response = "";
 
       // if the file exists
-      if (fs.existsSync(`./${filename}`)) {
+      if (fs.existsSync(`${directory}/${filename}`)) {
         response += "HTTP/1.1 200 OK\r\n";
         response += "\r\n";
       } else {
