@@ -33,6 +33,21 @@ const server = net.createServer((socket) => {
         `HTTP/1.1 200 OK\r\nContent-Type: text/plain\r\nContent-Length: ${message.length}\r\n\r\n${message}\r\n\r`
       );
     }
+    // if the path starts with /user-agent
+    else if (path.startsWith("/user-agent")) {
+      // extract the user agent
+      const userAgent = dataArr[2].split(" ")[1];
+
+      const response = "";
+      response += "HTTP/1.1 200 OK\r\n";
+      response += "Content-Type: text/plain\r\n";
+      response += `Content-Length: ${userAgent.length}\r\n`;
+      response += "\r\n";
+      response += `${userAgent}\r\n`;
+
+      // send the user agent back to the client
+      socket.write(response);
+    }
     // else return 404 Not Found
     else {
       socket.write("HTTP/1.1 404 Not Found\r\n\r\n");
