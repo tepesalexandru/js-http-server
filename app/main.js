@@ -64,7 +64,7 @@ const server = net.createServer((socket) => {
         response += "\r\n";
 
         // read the file contents
-        const fileContent = fs.readSync(`${directory}/${filename}`, {
+        const fileContent = fs.readFileSync(`${directory}/${filename}`, {
           encoding: "utf8",
           flag: "r",
         });
