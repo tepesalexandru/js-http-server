@@ -9,6 +9,8 @@ const server = net.createServer((socket) => {
   socket.on("data", (data) => {
     // respond with a HTTP 200 OK
     socket.write("HTTP/1.1 200 OK\r\n\r\n");
+    socket.end();
+    server.close();
   });
   socket.on("close", () => {
     socket.end();
