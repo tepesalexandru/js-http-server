@@ -50,7 +50,7 @@ const server = net.createServer((socket) => {
       socket.write(response);
     }
     // if the path starts with /files
-    else if (path.startsWith("/files")) {
+    else if (path.startsWith("/files") && method === "GET") {
       // extract directory from shell paramters
       const directory = process.argv[3];
       // extract the filename
@@ -77,6 +77,26 @@ const server = net.createServer((socket) => {
         response += "HTTP/1.1 404 Not Found\r\n";
         response += "\r\n";
       }
+
+      // send the response back to the client
+      socket.write(response);
+    }
+    // if the path starts with /files and the method is POST
+    else if (path.startsWith("/files") && method === "POST") {
+      // extract directory from shell paramters
+      const directory = process.argv[3];
+      // extract the filename
+      const filename = path.split("/files/")[1];
+      let response = "";
+
+      // read the request body
+      const requestBody = dataArr[dataArr.length - 1];
+
+      // write the request body to the file
+      fs.writeFile(`${directory}/${filename}`, requestBody);
+
+      response += "HTTP/1.1 201 Created\r\n";
+      response += "\r\n";
 
       // send the response back to the client
       socket.write(response);
