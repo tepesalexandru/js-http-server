@@ -19,14 +19,26 @@ const server = net.createServer((socket) => {
     // extract the path
     const path = firstLine.split(" ")[1];
 
-    // the path will have the following format: /echo/<message>
-    // extract the message
-    const message = path.split("/")[2] || "";
+    // if the path is / then return 200 OK
+    if (path === "/") {
+      socket.write("HTTP/1.1 200 OK\r\n\r\n");
+    }
+    // if path starts with /echo/
+    else if (path.startsWith("/echo/")) {
+      // the path will have the following format: /echo/<message>
+      // extract the message
+      const message = path.split("/")[2] || "";
 
-    // send the message back to the client
-    socket.write(
-      `HTTP/1.1 200 OK\r\n\r\nContent-Length: ${message.length}\r\n\r\n${message}\r\n\r\n`
-    );
+      // send the message back to the client
+      socket.write(
+        `HTTP/1.1 200 OK\r\n\r\nContent-Length: ${message.length}\r\n\r\n${message}\r\n\r\n`
+      );
+    }
+    // else return 404 Not Found
+    else {
+      socket.write("HTTP/1.1 404 Not Found\r\n\r\n");
+    }
+
     socket.end();
   });
   socket.on("close", () => {
