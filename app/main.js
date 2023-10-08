@@ -99,6 +99,9 @@ const server = net.createServer((socket) => {
         response += "HTTP/1.1 201 Created\r\n";
         response += "\r\n";
 
+        console.log("body:", requestBody);
+        console.log("the file was saved!");
+
         // send the response back to the client
         socket.write(response);
       });
