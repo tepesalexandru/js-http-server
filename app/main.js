@@ -93,18 +93,15 @@ const server = net.createServer((socket) => {
       const requestBody = dataArr[dataArr.length - 1];
 
       // write the request body to the file
-      fs.writeFile(
-        `${directory}/${filename}`,
-        requestBody,
-        // encodings
-        { encoding: "utf8", flag: "w" }
-      );
+      fs.writeFile(`${directory}/${filename}`, requestBody, (err) => {
+        if (err) {
+        }
+        response += "HTTP/1.1 201 Created\r\n";
+        response += "\r\n";
 
-      response += "HTTP/1.1 201 Created\r\n";
-      response += "\r\n";
-
-      // send the response back to the client
-      socket.write(response);
+        // send the response back to the client
+        socket.write(response);
+      });
     }
     // else return 404 Not Found
     else {
