@@ -69,9 +69,9 @@ const server = net.createServer((socket) => {
           response += "HTTP/1.1 200 OK\r\n";
           response += "\r\n";
         }
-        // send the response to the client
-        socket.write(response);
       });
+      // send the response to the client
+      socket.write(response);
     }
     // else return 404 Not Found
     else {
