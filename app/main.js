@@ -26,8 +26,8 @@ const server = net.createServer((socket) => {
     // if path starts with /echo/
     else if (path.startsWith("/echo/")) {
       // the path will have the following format: /echo/<message>
-      // extract the message
-      const message = path.split("/")[2] || "";
+      // extract everything after /echo/
+      const message = path.split("/echo/")[1];
 
       // send the message back to the client
       socket.write(
