@@ -19,12 +19,7 @@ const server = net.createServer((socket) => {
     // extract the path
     const path = firstLine.split(" ")[1];
 
-    // if the path is / then return 200 OK
-    if (path === "/") {
-      socket.write("HTTP/1.1 200 OK\r\n\r\n");
-    }
-    // if path starts with /echo/
-    else if (path.startsWith("/echo/")) {
+    if (path.startsWith("/echo/")) {
       // the path will have the following format: /echo/<message>
       // extract everything after /echo/
       const message = path.split("/echo/")[1];
@@ -45,6 +40,12 @@ const server = net.createServer((socket) => {
     socket.end();
     server.close();
   });
+});
+
+server.listen("/", (socket) => {
+  // return HTTP 200 OK
+  socket.write("HTTP/1.1 200 OK\r\n\r\n");
+  socket.end();
 });
 
 server.listen(4221, "localhost");
