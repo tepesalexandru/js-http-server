@@ -21,7 +21,7 @@ const server = net.createServer((socket) => {
 
     // the path will have the following format: /echo/<message>
     // extract the message
-    const message = path.split("/")[2];
+    const message = path.split("/")[2] || "";
 
     // send the message back to the client
     socket.write(
