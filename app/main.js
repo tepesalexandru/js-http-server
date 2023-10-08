@@ -7,7 +7,6 @@ console.log("Logs from your program will appear here!");
 const server = net.createServer((socket) => {
   // accept tcp connection
   socket.on("data", (data) => {
-    console.log("data", data.toString());
     // extract data from the buffer
     const dataString = data.toString();
     // extract all data by separating by new line
