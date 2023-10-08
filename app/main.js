@@ -94,20 +94,14 @@ const server = net.createServer((socket) => {
 
       console.log("writing to file..");
 
-      // write the request body to the file
-      fs.writeFile(`${directory}/${filename}`, requestBody, (err) => {
-        if (err) {
-          console.log("something went wrong", err);
-        }
+      try {
+        // write the request body to the file
+        fs.writeFileSync(`${directory}/${filename}`, requestBody);
         response += "HTTP/1.1 201 Created\r\n";
         response += "\r\n";
-
-        console.log("body:", requestBody);
-        console.log("the file was saved!");
-
-        // send the response back to the client
-        socket.write(response);
-      });
+      } catch (err) {}
+      // send the response back to the client
+      socket.write(response);
     }
     // else return 404 Not Found
     else {
