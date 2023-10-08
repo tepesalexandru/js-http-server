@@ -19,14 +19,14 @@ const server = net.createServer((socket) => {
     // extract the path
     const path = firstLine.split(" ")[1];
 
-    // if the path is / then return HTTP 200 OK
-    if (path === "/") {
-      socket.write("HTTP/1.1 200 OK\r\n\r\n");
-      socket.end();
-      return;
-    }
-    // otherwise, rerturn HTTP 404 Not Found
-    socket.write("HTTP/1.1 404 Not Found\r\n\r\n");
+    // the path will have the following format: /echo/<message>
+    // extract the message
+    const message = path.split("/")[2];
+
+    // send the message back to the client
+    socket.write(
+      `HTTP/1.1 200 OK\r\nContent-Length: ${message.length}\r\n\r\n${message}`
+    );
     socket.end();
   });
   socket.on("close", () => {
