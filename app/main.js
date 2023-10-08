@@ -68,6 +68,8 @@ const server = net.createServer((socket) => {
           encoding: "utf8",
           flag: "r",
         });
+        // compute content length
+        response += `Content-Length: ${fileContent.length}\r\n`;
         // send the file contents back to the client
         response += fileContent;
       } else {
