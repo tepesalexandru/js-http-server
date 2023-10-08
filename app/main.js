@@ -38,7 +38,7 @@ const server = net.createServer((socket) => {
       // extract the user agent
       const userAgent = dataArr[2].split(" ")[1];
 
-      const response = "";
+      let response = "";
       response += "HTTP/1.1 200 OK\r\n";
       response += "Content-Type: text/plain\r\n";
       response += `Content-Length: ${userAgent.length}\r\n`;
