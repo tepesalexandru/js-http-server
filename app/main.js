@@ -93,7 +93,12 @@ const server = net.createServer((socket) => {
       const requestBody = dataArr[dataArr.length - 1];
 
       // write the request body to the file
-      fs.writeFile(`${directory}/${filename}`, requestBody);
+      fs.writeFile(
+        `${directory}/${filename}`,
+        requestBody,
+        // encodings
+        { encoding: "utf8", flag: "w" }
+      );
 
       response += "HTTP/1.1 201 Created\r\n";
       response += "\r\n";
