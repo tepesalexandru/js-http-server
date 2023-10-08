@@ -60,7 +60,13 @@ const server = net.createServer((socket) => {
       // if the file exists
       if (fs.existsSync(`${directory}/${filename}`)) {
         response += "HTTP/1.1 200 OK\r\n";
+        response += "Content-Type: application/octet-stream\r\n";
         response += "\r\n";
+
+        // read the file contents
+        const fileContent = fs.readSync(`${directory}/${filename}`);
+        // send the file contents back to the client
+        response += fileContent;
       } else {
         // if the file does not exist
         response += "HTTP/1.1 404 Not Found\r\n";
