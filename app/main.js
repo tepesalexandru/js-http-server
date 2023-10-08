@@ -64,6 +64,9 @@ const server = net.createServer((socket) => {
         response += "HTTP/1.1 404 Not Found\r\n";
         response += "\r\n";
       }
+
+      // send the response back to the client
+      socket.write(response);
     }
     // else return 404 Not Found
     else {
