@@ -53,6 +53,7 @@ const server = net.createServer((socket) => {
     else if (path.startsWith("/files")) {
       // extract directory from shell paramters
       const directory = process.argv[2];
+      console.log("directory", directory);
       // extract the filename
       const filename = path.split("/files/")[1];
       let response = "";
