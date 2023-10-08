@@ -43,7 +43,7 @@ const server = net.createServer((socket) => {
       response += "Content-Type: text/plain\r\n";
       response += `Content-Length: ${userAgent.length}\r\n`;
       response += "\r\n";
-      response += `${userAgent}\r\n`;
+      response += `${userAgent}`;
 
       // send the user agent back to the client
       socket.write(response);
