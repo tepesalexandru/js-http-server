@@ -92,6 +92,8 @@ const server = net.createServer((socket) => {
       // read the request body
       const requestBody = dataArr[dataArr.length - 1];
 
+      console.log("writing to file..");
+
       // write the request body to the file
       fs.writeFile(`${directory}/${filename}`, requestBody, (err) => {
         if (err) {
