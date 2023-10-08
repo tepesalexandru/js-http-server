@@ -55,25 +55,15 @@ const server = net.createServer((socket) => {
       const filename = path.split("/files/")[1];
       let response = "";
 
-      // check if filename exists
-      fs.open(`./${filename}`, "r", (err, fd) => {
-        // if it does not exist
-        if (err) {
-          // return 404 Not Found
-          response += "HTTP/1.1 404 Not Found\r\n";
-          response += "\r\n";
-          // send the response to the client
-          socket.write(response);
-        }
-        // if it exists
-        else {
-          // return 200 OK
-          response += "HTTP/1.1 200 OK\r\n";
-          response += "\r\n";
-          // send the response to the client
-          socket.write(response);
-        }
-      });
+      // if the file exists
+      if (fs.existsSync(`./${filename}`)) {
+        response += "HTTP/1.1 200 OK\r\n";
+        response += "\r\n";
+      } else {
+        // if the file does not exist
+        response += "HTTP/1.1 404 Not Found\r\n";
+        response += "\r\n";
+      }
     }
     // else return 404 Not Found
     else {
