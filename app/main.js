@@ -25,7 +25,7 @@ const server = net.createServer((socket) => {
 
     // send the message back to the client
     socket.write(
-      `HTTP/1.1 200 OK\r\nContent-Length: ${message.length}\r\n\r\n${message}`
+      `HTTP/1.1 200 OK\r\n\r\nContent-Length: ${message.length}\r\n\r\n${message}\r\n\r\n`
     );
     socket.end();
   });
